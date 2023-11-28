@@ -17,7 +17,7 @@ class Lotto {
 
   /**
    *
-   * @param {number[]}numbers
+   * @param {number[]} numbers
    */
   #validate(numbers) {
     if (numbers.length !== 6) {
@@ -28,6 +28,7 @@ class Lotto {
     if (lottoNums.size !== numbers.length) {
       throw new Error('[ERROR] 로또 번호는 중복없이 입력되어야합니다.')
     }
+
   }
 
   /**
@@ -46,10 +47,21 @@ class Lotto {
     return new LottoDto(this.#numbers)
   }
 
+  /**
+   *
+   * @param {number[]} winningNumbers
+   * @return {number}
+   */
   countMatchingNumbers(winningNumbers){
-    return this.#numbers.filter(number=> winningNumbers.includes(number).length)
+    console.log(this.#numbers.filter(number=> winningNumbers.includes(number)).length,'개 일치!!!!')
+    return this.#numbers.filter(number=> winningNumbers.includes(number)).length
   }
 
+  /**
+   *
+   * @param {number} bonusNumber
+   * @return {boolean}
+   */
   hasBounusNumber(bonusNumber){
     return this.#numbers.includes(bonusNumber)
   }

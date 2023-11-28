@@ -49,7 +49,7 @@ class Money {
    */
   #validateMoneyAmount(sum){
     if(sum < 0) {
-      throw new Error('잔액은 0 아래로 떨어질 수 없음')
+      throw new Error('[ERROR] 잔액은 0 아래로 떨어질 수 없음')
     }
   }
 }

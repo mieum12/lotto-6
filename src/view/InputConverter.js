@@ -28,12 +28,13 @@ export class InputConverter {
 
   /**
    *
-   * @param {string} input
-   * @return {string[]}
-   * @description '가,나,다' -> ['가','나','다']
+   * @param input
+   * @return {number[]}
+   * @description '1,2,3,4,5,6' -> [1,2,3,4,5,6]
    */
   static convertToArray(input){
-    return input.split(COMMAS)
+    const str = input.split(',')
+    return str.map(Number)
   }
 
 }

@@ -11,6 +11,10 @@ class Controller {
 
   }
 
+  /**
+   *
+   * @return {Promise<Lottos>}
+   */
   static async buyLotto(){
     // 1. 구입 금액 입력 받음
     const money = await InputView.inputMoney()
@@ -22,14 +26,21 @@ class Controller {
     const lottosDto = lottos.toLottosDto()
     OutputView.printLottos(lottosDto)
 
+    return lottos
+
   }
 
+  /**
+   *
+   * @param {Lottos} boughtLottos
+   * @return {Promise<void>}
+   */
   static async drawLotto(boughtLottos){
     // 1. 로또 추첨 기계 생성
-    const lottoMachine = InputView.inputLottoMachine()
+    const lottoMachine = await InputView.inputLottoMachine()
     // 2. 로또 추첨하기
-    const result = lottoMachine.drawAll()
-
+    const results = lottoMachine.drawAll(boughtLottos)
+    OutputView.printResults(results)
   }
 }
 export default Controller

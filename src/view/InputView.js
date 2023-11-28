@@ -35,16 +35,43 @@ class InputView {
   /**
    *
    * @return {Promise<LottoMachine>}
-   * @description ✅당첨번호+보너스번호를 입력받는 곳 -> LottoMachine 생성
+   * @description ✅당첨번호 + 보너스번호를 입력받아 LottoMachine 생성
    */
   static async inputLottoMachine() {
-    const winningNums = await Console.readLineAsync(INPUT_WINNING_NUMBER_MESSAGE)
-    const bonusNumber = await Console.readLineAsync(INPUT_BONUS_NUMBER_MESSAGE)
-    InputValidator.validateFormatInput(winningNums)
-    InputValidator.validateNumberInput(bonusNumber)
-    const winningNumber = InputConverter.convertToArray(winningNums)
+    const winningNumbers = await this.#inputWinningNumbers();
+    const bonusNumber = await this.#inputBonusNumber();
 
-    return new LottoMachine(winningNumber,bonusNumber)
+    return new LottoMachine(winningNumbers,bonusNumber)
+  }
+
+  /**
+   *
+   * @return {Promise<number[]>}
+   */
+  static async #inputWinningNumbers(){
+    try{
+      const input = await Console.readLineAsync(INPUT_WINNING_NUMBER_MESSAGE)
+      InputValidator.validateFormatInput(input)
+      return InputConverter.convertToArray(input)
+    } catch (e) {
+      Console.print(`${e.message}`);
+      return this.#inputWinningNumbers()
+    }
+  }
+
+  /**
+   *
+   * @return {Promise<number>}
+   */
+  static async #inputBonusNumber(){
+    try{
+      const input = await Console.readLineAsync(INPUT_BONUS_NUMBER_MESSAGE)
+      InputValidator.validateNumberInput(input)
+      return InputConverter.convertToNumber(input)
+    } catch (e) {
+      Console.print(`${e.message}`);
+      return this.#inputBonusNumber()
+    }
   }
 
 }

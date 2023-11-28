@@ -6,12 +6,13 @@ class LottosDto {
 
   /**
    *
-   * @param {LottoDto[]} manyLottoDto
+   * @param {LottoDto[]} lottosDto
    * @description manyLottoDto는 [ LottoDto, LottoDto, LottoDto ...] 구조
    *
    */
-  constructor(manyLottoDto) {
-    this.#lottos = Object.freeze(manyLottoDto)
+  constructor(lottosDto) {
+    this.#lottos = Object.freeze(lottosDto)
+
   }
 
   /**
